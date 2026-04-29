@@ -1,1 +1,26 @@
-
+{
+  "name": "Gobierno Escolar",
+  "short_name": "GobEscolar",
+  "description": "Plataforma oficial del Gobierno Escolar — participación, propuestas y democracia estudiantil",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0a1628",
+  "theme_color": "#1a3a6b",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["education", "government"],
+  "lang": "es-CO"
+}
