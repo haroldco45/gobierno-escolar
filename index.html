@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="description" content="Plataforma oficial del Gobierno Escolar — participación estudiantil, propuestas y democracia">
+<meta name="theme-color" content="#1a3a6b">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="GobEscolar">
+<link rel="manifest" href="manifest.json">
+<title>Gobierno Escolar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --azul:     #1a3a6b;
+  --azul2:    #0d2447;
+  --azul3:    #2456a4;
+  --amarillo: #f5c518;
+  --rojo:     #c0392b;
+  --blanco:   #f8f7f2;
+  --gris:     #e8e6de;
+  --texto:    #1c1c1e;
+  --humo:     #f0ece2;
+  --sombra:   0 4px 24px rgba(0,0,0,.15);
+  --radio:    14px;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'DM Sans',sans-serif;
+  background:var(--blanco);
+  color:var(--texto);
+  overflow-x:hidden;
+}
+
+/* ── INSTALL BANNER ── */
+#installBanner{
+  display:none;position:fixed;bottom:0;left:0;right:0;
+  background:var(--azul2);color:#fff;
+  padding:14px 20px;z-index:9999;
+  flex-direction:row;align-items:center;gap:12px;
+  border-top:3px solid var(--amarillo);
+  animation:slideUp .4s ease;
+}
+@keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
+#installBanner.show{display:flex;}
+#installBanner p{flex:1;font-size:.85rem;line-height:1.4;}
+#installBanner button{
+  background:var(--amarillo);color:var(--azul2);
+  border:none;padding:8px 16px;border-radius:8px;
+  font-weight:600;cursor:pointer;white-space:nowrap;font-size:.85rem;
+}
+#installBanner .close-btn{
+  background:transparent;color:#aaa;padding:4px 8px;font-size:1.2rem;
+}
+
+/* ── HEADER / NAV ── */
+header{
+  position:sticky;top:0;z-index:100;
+  background:var(--azul2);
+  box-shadow:0 2px 16px rgba(0,0,0,.3);
+}
+.nav-inner{
+  max-width:900px;margin:0 auto;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 16px;height:58px;
+}
+.logo{
+  display:flex;align-items:center;gap:10px;text-decoration:none;
+}
+.logo-escudo{
+  width:36px;height:36px;
+  background:linear-gradient(135deg,var(--amarillo),#e8a800);
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:1.1rem;flex-shrink:0;
+  box-shadow:0 0 0 3px rgba(245,197,24,.25);
+}
+.logo-text{
+  font-family:'Playfair Display',serif;
+  color:#fff;font-size:.95rem;font-weight:700;line-height:1.2;
+}
+.logo-text span{display:block;font-size:.65rem;font-weight:400;color:#aac4e8;font-family:'DM Sans',sans-serif;}
+
+/* Bottom nav */
+.bottom-nav{
+  position:fixed;bottom:0;left:0;right:0;z-index:200;
+  background:var(--azul2);border-top:1px solid rgba(255,255,255,.1);
+  display:flex;justify-content:space-around;align-items:center;
+  height:60px;padding:0 4px;
+}
+.bnav-item{
+  flex:1;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:3px;
+  color:#8aafd4;cursor:pointer;padding:6px 2px;
+  border:none;background:transparent;
+  transition:color .2s;font-size:.6rem;
+  text-decoration:none;
+}
+.bnav-item.active,.bnav-item:hover{color:var(--amarillo);}
+.bnav-icon{font-size:1.25rem;line-height:1;}
+
+/* ── PÁGINAS ── */
+.page{display:none;min-height:calc(100vh - 118px);padding-bottom:70px;}
+.page.active{display:block;}
+
+/* ── HERO ── */
+.hero{
+  background:linear-gradient(160deg,var(--azul2) 0%,var(--azul) 55%,#2456a4 100%);
+  color:#fff;padding:40px 20px 50px;text-align:center;position:relative;
+  overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+.hero-badge{
+  display:inline-block;
+  background:rgba(245,197,24,.15);border:1px solid rgba(245,197,24,.4);
+  color:var(--amarillo);padding:4px 14px;border-radius:20px;
+  font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;
+  margin-bottom:16px;
+}
+.hero h1{
+  font-family:'Playfair Display',serif;
+  font-size:2rem;font-weight:900;line-height:1.15;
+  margin-bottom:10px;
+}
+.hero h1 em{color:var(--amarillo);font-style:normal;}
+.hero p{font-size:.9rem;color:#b8cfe8;max-width:340px;margin:0 auto 24px;line-height:1.6;}
+.hero-flags{
+  display:flex;gap:4px;justify-content:center;margin-bottom:28px;
+}
+.flag-strip{height:6px;width:50px;border-radius:3px;}
+
+.stats-row{
+  display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:24px;
+}
+.stat-card{
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:12px;padding:14px 20px;min-width:100px;
+  backdrop-filter:blur(10px);
+}
+.stat-num{
+  font-family:'Playfair Display',serif;
+  font-size:1.6rem;font-weight:900;color:var(--amarillo);
+}
+.stat-lbl{font-size:.7rem;color:#8aafd4;margin-top:2px;}
+
+/* ── SECCIONES GENERALES ── */
+.section{padding:28px 16px;max-width:900px;margin:0 auto;}
+.section-title{
+  font-family:'Playfair Display',serif;
+  font-size:1.4rem;font-weight:900;color:var(--azul2);
+  margin-bottom:6px;
+}
+.section-sub{font-size:.82rem;color:#666;margin-bottom:20px;line-height:1.5;}
+.divider{width:40px;height:4px;background:var(--amarillo);border-radius:2px;margin:8px 0 18px;}
+
+/* ── CARDS CANDIDATOS ── */
+.candidatos-grid{display:flex;flex-direction:column;gap:16px;}
+.candidato-card{
+  background:#fff;border-radius:var(--radio);
+  box-shadow:var(--sombra);overflow:hidden;
+  border-left:5px solid var(--azul3);
+  transition:transform .2s,box-shadow .2s;
+}
+.candidato-card:hover{transform:translateY(-3px);box-shadow:0 8px 32px rgba(0,0,0,.15);}
+.candidato-card.presidente{border-left-color:var(--amarillo);}
+.candidato-card.vicepresidente{border-left-color:var(--rojo);}
+.candidato-header{
+  display:flex;align-items:center;gap:14px;padding:16px;
+  background:linear-gradient(90deg,#f8f9fc,#fff);
+}
+.candidato-avatar{
+  width:56px;height:56px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.4rem;flex-shrink:0;font-weight:900;
+  color:#fff;font-family:'Playfair Display',serif;
+}
+.av-azul{background:linear-gradient(135deg,var(--azul3),var(--azul2));}
+.av-rojo{background:linear-gradient(135deg,#e74c3c,var(--rojo));}
+.av-verde{background:linear-gradient(135deg,#27ae60,#1e8449);}
+.av-morado{background:linear-gradient(135deg,#8e44ad,#6c3483);}
+.candidato-info{flex:1;}
+.candidato-nombre{font-weight:700;font-size:1rem;color:var(--azul2);}
+.candidato-cargo{
+  font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;
+  color:#888;margin-top:2px;
+}
+.candidato-grado{
+  background:var(--amarillo);color:var(--azul2);
+  padding:2px 10px;border-radius:20px;font-size:.68rem;font-weight:700;
+  margin-top:6px;display:inline-block;
+}
+.candidato-body{padding:0 16px 16px;}
+.candidato-propuesta{
+  font-size:.82rem;color:#555;line-height:1.6;
+  border-top:1px solid var(--gris);padding-top:12px;
+}
+.votos-barra-wrap{margin-top:10px;}
+.votos-label{display:flex;justify-content:space-between;font-size:.72rem;color:#888;margin-bottom:4px;}
+.barra{height:8px;background:var(--gris);border-radius:4px;overflow:hidden;}
+.barra-fill{height:100%;border-radius:4px;transition:width 1s ease;}
+
+/* ── PROPUESTAS ── */
+.propuestas-list{display:flex;flex-direction:column;gap:14px;}
+.propuesta-item{
+  background:#fff;border-radius:var(--radio);padding:18px;
+  box-shadow:var(--sombra);display:flex;gap:14px;align-items:flex-start;
+}
+.propuesta-icon{
+  width:44px;height:44px;border-radius:12px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.3rem;flex-shrink:0;
+}
+.p-azul{background:#e8f0fb;}
+.p-verde{background:#e8f8ef;}
+.p-rojo{background:#fceaea;}
+.p-amarillo{background:#fef9e7;}
+.propuesta-content{}
+.propuesta-titulo{font-weight:700;font-size:.95rem;color:var(--azul2);margin-bottom:4px;}
+.propuesta-desc{font-size:.8rem;color:#666;line-height:1.5;}
+.propuesta-tag{
+  display:inline-block;margin-top:8px;
+  padding:2px 10px;border-radius:20px;font-size:.65rem;font-weight:600;
+  text-transform:uppercase;letter-spacing:.05em;
+}
+.tag-azul{background:#dbeafe;color:#1e40af;}
+.tag-verde{background:#d1fae5;color:#065f46;}
+.tag-rojo{background:#fee2e2;color:#991b1b;}
+.tag-amarillo{background:#fef3c7;color:#92400e;}
+
+/* ── VOTO ── */
+.voto-section{
+  background:linear-gradient(135deg,var(--azul2),var(--azul));
+  color:#fff;border-radius:var(--radio);padding:24px;
+  margin-bottom:20px;text-align:center;
+}
+.voto-section h3{font-family:'Playfair Display',serif;font-size:1.3rem;margin-bottom:6px;}
+.voto-section p{font-size:.82rem;color:#b8cfe8;margin-bottom:20px;}
+.voto-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;}
+.voto-opcion{
+  background:rgba(255,255,255,.08);border:2px solid rgba(255,255,255,.15);
+  border-radius:12px;padding:14px 10px;cursor:pointer;
+  transition:all .2s;text-align:center;
+}
+.voto-opcion:hover,.voto-opcion.sel{
+  background:rgba(245,197,24,.15);
+  border-color:var(--amarillo);
+}
+.voto-opcion .av{
+  width:44px;height:44px;border-radius:50%;margin:0 auto 8px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.2rem;color:#fff;font-weight:900;
+}
+.voto-opcion .vname{font-size:.82rem;font-weight:600;line-height:1.3;}
+.voto-opcion .vcargo{font-size:.65rem;color:#8aafd4;margin-top:2px;}
+.btn-votar{
+  width:100%;padding:14px;border:none;border-radius:12px;
+  background:var(--amarillo);color:var(--azul2);
+  font-weight:700;font-size:1rem;cursor:pointer;
+  transition:opacity .2s;letter-spacing:.02em;
+}
+.btn-votar:hover{opacity:.9;}
+.btn-votar:disabled{opacity:.5;cursor:default;}
+
+.resultado-card{
+  background:#fff;border-radius:var(--radio);padding:18px;
+  box-shadow:var(--sombra);margin-bottom:16px;
+}
+.resultado-card h4{font-family:'Playfair Display',serif;font-size:1rem;color:var(--azul2);margin-bottom:12px;}
+
+/* ── NOTICIAS ── */
+.noticias-list{display:flex;flex-direction:column;gap:14px;}
+.noticia-card{
+  background:#fff;border-radius:var(--radio);overflow:hidden;
+  box-shadow:var(--sombra);display:flex;gap:0;
+}
+.noticia-color{width:6px;flex-shrink:0;}
+.noticia-body{padding:14px;}
+.noticia-fecha{font-size:.68rem;color:#aaa;margin-bottom:4px;text-transform:uppercase;letter-spacing:.06em;}
+.noticia-titulo{font-weight:700;font-size:.92rem;color:var(--azul2);margin-bottom:4px;line-height:1.4;}
+.noticia-texto{font-size:.8rem;color:#666;line-height:1.5;}
+.noticia-tag{
+  display:inline-block;margin-top:8px;
+  padding:2px 10px;border-radius:20px;font-size:.65rem;font-weight:600;
+}
+
+/* ── CONTACTO / INFO ── */
+.info-card{
+  background:#fff;border-radius:var(--radio);padding:20px;
+  box-shadow:var(--sombra);margin-bottom:14px;
+}
+.info-card h4{font-weight:700;color:var(--azul2);margin-bottom:12px;display:flex;gap:8px;align-items:center;}
+.miembro-row{
+  display:flex;align-items:center;gap:12px;
+  padding:10px 0;border-bottom:1px solid var(--gris);
+}
+.miembro-row:last-child{border-bottom:none;}
+.miembro-av{
+  width:38px;height:38px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-weight:900;color:#fff;font-size:.9rem;flex-shrink:0;
+}
+.miembro-info{}
+.miembro-nombre{font-weight:600;font-size:.88rem;color:var(--azul2);}
+.miembro-cargo{font-size:.72rem;color:#888;}
+
+.contacto-form{display:flex;flex-direction:column;gap:12px;}
+.form-field{display:flex;flex-direction:column;gap:4px;}
+.form-field label{font-size:.78rem;font-weight:600;color:var(--azul2);}
+.form-field input,.form-field textarea,.form-field select{
+  padding:10px 14px;border:1.5px solid var(--gris);border-radius:10px;
+  font-family:'DM Sans',sans-serif;font-size:.88rem;color:var(--texto);
+  background:#fff;transition:border-color .2s;outline:none;
+}
+.form-field input:focus,.form-field textarea:focus,.form-field select:focus{
+  border-color:var(--azul3);
+}
+.form-field textarea{resize:vertical;min-height:90px;}
+.btn-enviar{
+  padding:13px;border:none;border-radius:12px;
+  background:var(--azul2);color:#fff;
+  font-weight:700;font-size:.95rem;cursor:pointer;
+  transition:background .2s;
+}
+.btn-enviar:hover{background:var(--azul3);}
+.habeas-notice{
+  background:#f0f4ff;border-radius:10px;padding:12px;
+  font-size:.72rem;color:#555;line-height:1.5;border-left:3px solid var(--azul3);
+  margin-top:4px;
+}
+
+/* ── MODAL ── */
+.modal-overlay{
+  display:none;position:fixed;inset:0;z-index:500;
+  background:rgba(0,0,0,.6);backdrop-filter:blur(4px);
+  align-items:flex-end;justify-content:center;
+}
+.modal-overlay.open{display:flex;}
+.modal{
+  background:#fff;border-radius:20px 20px 0 0;
+  width:100%;max-width:600px;padding:24px 20px;
+  max-height:85vh;overflow-y:auto;
+  animation:slideModal .3s ease;
+}
+@keyframes slideModal{from{transform:translateY(100%)}to{transform:translateY(0)}}
+.modal-handle{
+  width:36px;height:4px;background:var(--gris);border-radius:2px;
+  margin:0 auto 20px;
+}
+.modal h3{font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--azul2);margin-bottom:8px;}
+.modal p{font-size:.85rem;color:#555;line-height:1.6;}
+.modal-close{
+  position:absolute;top:16px;right:16px;
+  background:var(--gris);border:none;width:32px;height:32px;
+  border-radius:50%;cursor:pointer;font-size:1rem;
+}
+
+/* ── TOAST ── */
+.toast{
+  position:fixed;top:70px;left:50%;transform:translateX(-50%) translateY(-20px);
+  background:var(--azul2);color:#fff;
+  padding:10px 22px;border-radius:30px;
+  font-size:.82rem;font-weight:600;
+  opacity:0;transition:all .3s;z-index:9999;
+  border:1px solid rgba(245,197,24,.3);
+  pointer-events:none;white-space:nowrap;
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+/* ── FOOTER ── */
+.pie{
+  background:var(--azul2);color:#8aafd4;
+  text-align:center;padding:16px;
+  font-size:.7rem;line-height:1.6;
+  border-top:2px solid var(--amarillo);
+}
+.pie strong{color:var(--amarillo);}
+
+/* ── ANIMACIONES ── */
+@keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.page.active .section{animation:fadeIn .35s ease both;}
+
+/* ── RESPONSIVE ── */
+@media(min-width:600px){
+  .candidatos-grid{display:grid;grid-template-columns:1fr 1fr;}
+  .voto-grid{grid-template-columns:repeat(4,1fr);}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="nav-inner">
+    <a class="logo" href="#">
+      <div class="logo-escudo">🏛️</div>
+      <div class="logo-text">
+        Gobierno Escolar
+        <span>Institución Educativa</span>
+      </div>
+    </a>
+    <div style="display:flex;gap:6px;">
+      <div style="width:8px;height:28px;background:#f5c518;border-radius:2px;"></div>
+      <div style="width:8px;height:28px;background:#fff;border-radius:2px;"></div>
+      <div style="width:8px;height:28px;background:#c0392b;border-radius:2px;"></div>
+    </div>
+  </div>
+</header>
+
+<!-- PÁGINAS -->
+<!-- INICIO -->
+<div id="page-inicio" class="page active">
+  <div class="hero">
+    <div class="hero-badge">⭐ Año Escolar 2025–2026</div>
+    <h1>Tu voz,<br>nuestro <em>futuro</em></h1>
+    <p>Plataforma oficial de participación democrática estudiantil de nuestra institución.</p>
+    <div class="hero-flags">
+      <div class="flag-strip" style="background:#f5c518;"></div>
+      <div class="flag-strip" style="background:#fff;"></div>
+      <div class="flag-strip" style="background:#c0392b;"></div>
+    </div>
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-num">4</div>
+        <div class="stat-lbl">Candidatos</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">12</div>
+        <div class="stat-lbl">Propuestas</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">320</div>
+        <div class="stat-lbl">Estudiantes</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Bienvenidos</div>
+    <div class="divider"></div>
+    <div class="section-sub">El Gobierno Escolar es el espacio donde los estudiantes ejercen su derecho a la participación democrática, eligiendo a sus representantes y construyendo un mejor ambiente escolar para todos.</div>
+
+    <!-- accesos rápidos -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px;">
+      <div onclick="navTo('candidatos')" style="background:linear-gradient(135deg,#1a3a6b,#2456a4);color:#fff;border-radius:14px;padding:18px 14px;cursor:pointer;text-align:center;">
+        <div style="font-size:1.8rem;margin-bottom:6px;">🗳️</div>
+        <div style="font-weight:700;font-size:.88rem;">Candidatos</div>
+        <div style="font-size:.72rem;color:#aac4e8;margin-top:2px;">Conoce las planchas</div>
+      </div>
+      <div onclick="navTo('propuestas')" style="background:linear-gradient(135deg,#27ae60,#1e8449);color:#fff;border-radius:14px;padding:18px 14px;cursor:pointer;text-align:center;">
+        <div style="font-size:1.8rem;margin-bottom:6px;">📋</div>
+        <div style="font-weight:700;font-size:.88rem;">Propuestas</div>
+        <div style="font-size:.72rem;color:#a9dfbf;margin-top:2px;">Ideas para mejorar</div>
+      </div>
+      <div onclick="navTo('votar')" style="background:linear-gradient(135deg,#c0392b,#e74c3c);color:#fff;border-radius:14px;padding:18px 14px;cursor:pointer;text-align:center;">
+        <div style="font-size:1.8rem;margin-bottom:6px;">✅</div>
+        <div style="font-weight:700;font-size:.88rem;">Votar</div>
+        <div style="font-size:.72rem;color:#f5b7b1;margin-top:2px;">Ejerce tu derecho</div>
+      </div>
+      <div onclick="navTo('noticias')" style="background:linear-gradient(135deg,#7d6608,#b7950b);color:#fff;border-radius:14px;padding:18px 14px;cursor:pointer;text-align:center;">
+        <div style="font-size:1.8rem;margin-bottom:6px;">📰</div>
+        <div style="font-weight:700;font-size:.88rem;">Noticias</div>
+        <div style="font-size:.72rem;color:#f9e79f;margin-top:2px;">Últimas novedades</div>
+      </div>
+    </div>
+
+    <!-- calendario -->
+    <div style="background:var(--humo);border-radius:var(--radio);padding:18px;margin-top:20px;">
+      <div style="font-weight:700;color:var(--azul2);margin-bottom:12px;font-size:.95rem;">📅 Calendario Electoral</div>
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <div style="display:flex;gap:12px;align-items:center;">
+          <div style="background:var(--azul2);color:#fff;border-radius:8px;padding:6px 10px;font-size:.7rem;font-weight:700;text-align:center;min-width:48px;">MAY<br><span style="font-size:1rem;">5</span></div>
+          <div><div style="font-weight:600;font-size:.85rem;">Inscripción de candidatos</div><div style="font-size:.75rem;color:#888;">Plazo límite para inscribirse</div></div>
+        </div>
+        <div style="display:flex;gap:12px;align-items:center;">
+          <div style="background:var(--rojo);color:#fff;border-radius:8px;padding:6px 10px;font-size:.7rem;font-weight:700;text-align:center;min-width:48px;">MAY<br><span style="font-size:1rem;">12</span></div>
+          <div><div style="font-weight:600;font-size:.85rem;">Debate estudiantil</div><div style="font-size:.75rem;color:#888;">Salón de actos, 9:00 a.m.</div></div>
+        </div>
+        <div style="display:flex;gap:12px;align-items:center;">
+          <div style="background:var(--amarillo);color:var(--azul2);border-radius:8px;padding:6px 10px;font-size:.7rem;font-weight:700;text-align:center;min-width:48px;">MAY<br><span style="font-size:1rem;">20</span></div>
+          <div><div style="font-weight:600;font-size:.85rem;">🗳️ DÍA DE ELECCIONES</div><div style="font-size:.75rem;color:#888;">¡No faltes a votar!</div></div>
+        </div>
+        <div style="display:flex;gap:12px;align-items:center;">
+          <div style="background:#27ae60;color:#fff;border-radius:8px;padding:6px 10px;font-size:.7rem;font-weight:700;text-align:center;min-width:48px;">MAY<br><span style="font-size:1rem;">22</span></div>
+          <div><div style="font-weight:600;font-size:.85rem;">Posesión del nuevo gobierno</div><div style="font-size:.75rem;color:#888;">Acto institucional oficial</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pie">
+    <strong>Desarrollada por Vibras Positivas HM</strong><br>Derechos de Autor Reservados
+  </div>
+</div>
+
+<!-- CANDIDATOS -->
+<div id="page-candidatos" class="page">
+  <div class="section">
+    <div class="section-title">Candidatos</div>
+    <div class="divider"></div>
+    <div class="section-sub">Conoce a los aspirantes al Gobierno Escolar. Haz clic en cada candidato para ver su propuesta completa.</div>
+
+    <div class="candidatos-grid">
+
+      <div class="candidato-card presidente" onclick="abrirCandidato('Laura')">
+        <div class="candidato-header">
+          <div class="candidato-avatar av-azul">L</div>
+          <div class="candidato-info">
+            <div class="candidato-nombre">Laura Sofía Martínez</div>
+            <div class="candidato-cargo">🎖️ Candidata a Presidenta</div>
+            <div class="candidato-grado">Grado 11°-A</div>
+          </div>
+        </div>
+        <div class="candidato-body">
+          <div class="candidato-propuesta">
+            "Una escuela donde cada estudiante tenga voz, participación y oportunidades reales de crecer."
+          </div>
+          <div class="votos-barra-wrap">
+            <div class="votos-label"><span>Preferencia</span><span>38%</span></div>
+            <div class="barra"><div class="barra-fill" style="width:38%;background:var(--azul3);"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="candidato-card vicepresidente" onclick="abrirCandidato('Carlos')">
+        <div class="candidato-header">
+          <div class="candidato-avatar av-rojo">C</div>
+          <div class="candidato-info">
+            <div class="candidato-nombre">Carlos Andrés Peña</div>
+            <div class="candidato-cargo">🎖️ Candidato a Presidente</div>
+            <div class="candidato-grado">Grado 10°-B</div>
+          </div>
+        </div>
+        <div class="candidato-body">
+          <div class="candidato-propuesta">
+            "Más deporte, más cultura y una cafetería digna para todos los estudiantes."
+          </div>
+          <div class="votos-barra-wrap">
+            <div class="votos-label"><span>Preferencia</span><span>29%</span></div>
+            <div class="barra"><div class="barra-fill" style="width:29%;background:var(--rojo);"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="candidato-card" onclick="abrirCandidato('Valeria')">
+        <div class="candidato-header">
+          <div class="candidato-avatar av-verde">V</div>
+          <div class="candidato-info">
+            <div class="candidato-nombre">Valeria Torres</div>
+            <div class="candidato-cargo">🎖️ Candidata a Presidenta</div>
+            <div class="candidato-grado">Grado 11°-B</div>
+          </div>
+        </div>
+        <div class="candidato-body">
+          <div class="candidato-propuesta">
+            "Tecnología, medio ambiente y bienestar estudiantil como ejes de un gobierno moderno."
+          </div>
+          <div class="votos-barra-wrap">
+            <div class="votos-label"><span>Preferencia</span><span>22%</span></div>
+            <div class="barra"><div class="barra-fill" style="width:22%;background:#27ae60;"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="candidato-card" onclick="abrirCandidato('Sebastián')">
+        <div class="candidato-header">
+          <div class="candidato-avatar av-morado">S</div>
+          <div class="candidato-info">
+            <div class="candidato-nombre">Sebastián Gómez</div>
+            <div class="candidato-cargo">🎖️ Candidato a Presidente</div>
+            <div class="candidato-grado">Grado 10°-A</div>
+          </div>
+        </div>
+        <div class="candidato-body">
+          <div class="candidato-propuesta">
+            "Transparencia, honestidad y trabajo colectivo para transformar nuestra institución."
+          </div>
+          <div class="votos-barra-wrap">
+            <div class="votos-label"><span>Preferencia</span><span>11%</span></div>
+            <div class="barra"><div class="barra-fill" style="width:11%;background:#8e44ad;"></div></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- PROPUESTAS -->
+<div id="page-propuestas" class="page">
+  <div class="section">
+    <div class="section-title">Propuestas</div>
+    <div class="divider"></div>
+    <div class="section-sub">Estas son las propuestas que el Gobierno Escolar plantea para mejorar nuestra institución durante el año lectivo.</div>
+
+    <div class="propuestas-list">
+      <div class="propuesta-item">
+        <div class="propuesta-icon p-azul">📚</div>
+        <div class="propuesta-content">
+          <div class="propuesta-titulo">Biblioteca digital estudiantil</div>
+          <div class="propuesta-desc">Crear un repositorio digital con materiales de estudio, libros y recursos educativos accesibles para todos los estudiantes desde cualquier dispositivo.</div>
+          <span class="propuesta-tag tag-azul">Educación</span>
+        </div>
+      </div>
+      <div class="propuesta-item">
+        <div class="propuesta-icon p-verde">🌿</div>
+        <div class="propuesta-content">
+          <div class="propuesta-titulo">Huerta escolar sostenible</div>
+          <div class="propuesta-desc">Implementar un jardín y huerta orgánica en los patios del colegio, promoviendo el cuidado ambiental y la alimentación saludable.</div>
+          <span class="propuesta-tag tag-verde">Medio Ambiente</span>
+        </div>
+      </div>
+      <div class="propuesta-item">
+        <div class="propuesta-icon p-rojo">⚽</div>
+        <div class="propuesta-content">
+          <div class="propuesta-titulo">Torneos deportivos interclases</div>
+          <div class="propuesta-desc">Organizar campeonatos de fútbol, baloncesto, voleibol y atletismo entre los diferentes grados, fomentando el trabajo en equipo y la convivencia.</div>
+          <span class="propuesta-tag tag-rojo">Deporte</span>
+        </div>
+      </div>
+      <div class="propuesta-item">
+        <div class="propuesta-icon p-amarillo">🎭</div>
+        <div class="propuesta-content">
+          <div class="propuesta-titulo">Festival cultural anual</div>
+          <div class="propuesta-desc">Organizar un festival donde los estudiantes puedan mostrar sus talentos artísticos: música, danza, teatro, artes plásticas y más.</div>
+          <span class="propuesta-tag tag-amarillo">Cultura</span>
+        </div>
+      </div>
+      <div class="propuesta-item">
+        <div class="propuesta-icon p-azul">💻</div>
+        <div class="propuesta-content">
+          <div class="propuesta-titulo">Sala de tecnología mejorada</div>
+          <div class="propuesta-desc">Gestionar ante las directivas la actualización de equipos y conexión a internet estable para optimizar las clases de informática y herramientas digitales.</div>
+          <span class="propuesta-tag tag-azul">Tecnología</span>
+        </div>
+      </div>
+      <div class="propuesta-item">
+        <div class="propuesta-icon p-verde">🤝</div>
+        <div class="propuesta-content">
+          <div class="propuesta-titulo">Programa de convivencia escolar</div>
+          <div class="propuesta-desc">Crear espacios de mediación y resolución pacífica de conflictos, con estudiantes capacitados como mediadores de paz dentro de la institución.</div>
+          <span class="propuesta-tag tag-verde">Convivencia</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- VOTAR -->
+<div id="page-votar" class="page">
+  <div class="section">
+    <div class="section-title">Urna Electoral</div>
+    <div class="divider"></div>
+    <div class="section-sub">Selecciona tu candidato preferido y ejerce tu derecho democrático. El voto es secreto e irrepetible.</div>
+
+    <div id="voto-form-wrap">
+      <div class="voto-section">
+        <h3>🗳️ Elige tu candidato</h3>
+        <p>Toca la tarjeta del candidato de tu preferencia</p>
+        <div class="voto-grid">
+          <div class="voto-opcion" onclick="selVoto(this,'Laura Sofía Martínez')">
+            <div class="av av-azul">L</div>
+            <div class="vname">Laura Sofía</div>
+            <div class="vcargo">Grado 11°-A</div>
+          </div>
+          <div class="voto-opcion" onclick="selVoto(this,'Carlos Andrés Peña')">
+            <div class="av av-rojo">C</div>
+            <div class="vname">Carlos Andrés</div>
+            <div class="vcargo">Grado 10°-B</div>
+          </div>
+          <div class="voto-opcion" onclick="selVoto(this,'Valeria Torres')">
+            <div class="av av-verde">V</div>
+            <div class="vname">Valeria Torres</div>
+            <div class="vcargo">Grado 11°-B</div>
+          </div>
+          <div class="voto-opcion" onclick="selVoto(this,'Sebastián Gómez')">
+            <div class="av av-morado">S</div>
+            <div class="vname">Sebastián Gómez</div>
+            <div class="vcargo">Grado 10°-A</div>
+          </div>
+        </div>
+        <div style="margin-bottom:12px;">
+          <label style="font-size:.78rem;color:#8aafd4;display:block;margin-bottom:6px;">Tu grado:</label>
+          <select id="voto-grado" style="width:100%;padding:10px;border-radius:10px;border:1.5px solid rgba(255,255,255,.2);background:rgba(255,255,255,.1);color:#fff;font-family:inherit;font-size:.88rem;">
+            <option value="">— Selecciona tu grado —</option>
+            <option>6°</option><option>7°</option><option>8°</option>
+            <option>9°</option><option>10°</option><option>11°</option>
+          </select>
+        </div>
+        <button class="btn-votar" id="btn-votar" disabled onclick="emitirVoto()">Emitir mi voto ✅</button>
+      </div>
+    </div>
+
+    <!-- Resultados parciales -->
+    <div class="resultado-card">
+      <h4>📊 Resultados parciales</h4>
+      <div style="display:flex;flex-direction:column;gap:10px;" id="resultados-wrap">
+        <div>
+          <div style="display:flex;justify-content:space-between;font-size:.8rem;margin-bottom:4px;">
+            <span style="font-weight:600;">Laura Sofía Martínez</span><span style="color:var(--azul3);font-weight:700;" id="r1-pct">38%</span>
+          </div>
+          <div class="barra"><div class="barra-fill" id="r1-bar" style="width:38%;background:var(--azul3);"></div></div>
+        </div>
+        <div>
+          <div style="display:flex;justify-content:space-between;font-size:.8rem;margin-bottom:4px;">
+            <span style="font-weight:600;">Carlos Andrés Peña</span><span style="color:var(--rojo);font-weight:700;" id="r2-pct">29%</span>
+          </div>
+          <div class="barra"><div class="barra-fill" id="r2-bar" style="width:29%;background:var(--rojo);"></div></div>
+        </div>
+        <div>
+          <div style="display:flex;justify-content:space-between;font-size:.8rem;margin-bottom:4px;">
+            <span style="font-weight:600;">Valeria Torres</span><span style="color:#27ae60;font-weight:700;" id="r3-pct">22%</span>
+          </div>
+          <div class="barra"><div class="barra-fill" id="r3-bar" style="width:22%;background:#27ae60;"></div></div>
+        </div>
+        <div>
+          <div style="display:flex;justify-content:space-between;font-size:.8rem;margin-bottom:4px;">
+            <span style="font-weight:600;">Sebastián Gómez</span><span style="color:#8e44ad;font-weight:700;" id="r4-pct">11%</span>
+          </div>
+          <div class="barra"><div class="barra-fill" id="r4-bar" style="width:11%;background:#8e44ad;"></div></div>
+        </div>
+      </div>
+      <div style="font-size:.72rem;color:#aaa;margin-top:10px;text-align:center;">* Resultados de encuesta de preferencia — votación oficial el 20 de mayo</div>
+    </div>
+  </div>
+</div>
+
+<!-- NOTICIAS -->
+<div id="page-noticias" class="page">
+  <div class="section">
+    <div class="section-title">Noticias</div>
+    <div class="divider"></div>
+    <div class="section-sub">Mantente informado sobre las novedades del Gobierno Escolar y la vida institucional.</div>
+
+    <div class="noticias-list">
+      <div class="noticia-card">
+        <div class="noticia-color" style="background:var(--amarillo);"></div>
+        <div class="noticia-body">
+          <div class="noticia-fecha">28 ABR 2026</div>
+          <div class="noticia-titulo">¡Abiertas las inscripciones para candidatos al Gobierno Escolar!</div>
+          <div class="noticia-texto">Los estudiantes interesados en participar como candidatos tienen hasta el 5 de mayo para inscribirse en la rectoría. Se requiere carta de motivación y aval del director de grupo.</div>
+          <span class="noticia-tag" style="background:#fef9e7;color:#92400e;">Elecciones</span>
+        </div>
+      </div>
+      <div class="noticia-card">
+        <div class="noticia-color" style="background:var(--azul3);"></div>
+        <div class="noticia-body">
+          <div class="noticia-fecha">25 ABR 2026</div>
+          <div class="noticia-titulo">Taller de liderazgo estudiantil con la Alcaldía Municipal</div>
+          <div class="noticia-texto">El pasado martes, representantes estudiantiles participaron en un taller de formación política y democrática organizado en conjunto con la Secretaría de Educación.</div>
+          <span class="noticia-tag" style="background:#dbeafe;color:#1e40af;">Formación</span>
+        </div>
+      </div>
+      <div class="noticia-card">
+        <div class="noticia-color" style="background:#27ae60;"></div>
+        <div class="noticia-body">
+          <div class="noticia-fecha">20 ABR 2026</div>
+          <div class="noticia-titulo">Gobierno Escolar gestiona nuevos balones para el descanso</div>
+          <div class="noticia-texto">Gracias a la gestión del actual consejo estudiantil, la institución recibió una dotación de balones de fútbol, baloncesto y microfútbol para uso libre en los descansos.</div>
+          <span class="noticia-tag" style="background:#d1fae5;color:#065f46;">Logros</span>
+        </div>
+      </div>
+      <div class="noticia-card">
+        <div class="noticia-color" style="background:var(--rojo);"></div>
+        <div class="noticia-body">
+          <div class="noticia-fecha">15 ABR 2026</div>
+          <div class="noticia-titulo">Recordatorio: Reglamento del proceso electoral estudiantil</div>
+          <div class="noticia-texto">La comisión electoral recuerda que el proceso debe enmarcarse en los principios del Manual de Convivencia. Se prohíbe propaganda irrespetuosa o que afecte la convivencia.</div>
+          <span class="noticia-tag" style="background:#fee2e2;color:#991b1b;">Normativa</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACTO -->
+<div id="page-contacto" class="page">
+  <div class="section">
+    <div class="section-title">Contacto</div>
+    <div class="divider"></div>
+    <div class="section-sub">Comunícate con el Gobierno Escolar, conoce a sus integrantes o envíanos tus sugerencias.</div>
+
+    <div class="info-card">
+      <h4>👥 Gobierno Escolar Vigente</h4>
+      <div class="miembro-row">
+        <div class="miembro-av av-azul">P</div>
+        <div class="miembro-info">
+          <div class="miembro-nombre">Personería Estudiantil</div>
+          <div class="miembro-cargo">Representante de derechos estudiantiles</div>
+        </div>
+      </div>
+      <div class="miembro-row">
+        <div class="miembro-av av-verde">C</div>
+        <div class="miembro-info">
+          <div class="miembro-nombre">Consejo Estudiantil</div>
+          <div class="miembro-cargo">Representantes de cada grado</div>
+        </div>
+      </div>
+      <div class="miembro-row">
+        <div class="miembro-av av-rojo">D</div>
+        <div class="miembro-info">
+          <div class="miembro-nombre">Directivo Docente Asesor</div>
+          <div class="miembro-cargo">Coordinador de convivencia</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-card">
+      <h4>💌 Envía una sugerencia</h4>
+      <div class="contacto-form">
+        <div class="form-field">
+          <label>Nombre (opcional)</label>
+          <input type="text" placeholder="Tu nombre o mantente anónimo">
+        </div>
+        <div class="form-field">
+          <label>Grado *</label>
+          <select>
+            <option value="">— Selecciona —</option>
+            <option>6°</option><option>7°</option><option>8°</option>
+            <option>9°</option><option>10°</option><option>11°</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label>Tema *</label>
+          <select>
+            <option value="">— Selecciona —</option>
+            <option>Convivencia escolar</option>
+            <option>Infraestructura</option>
+            <option>Actividades culturales</option>
+            <option>Deporte</option>
+            <option>Alimentación escolar</option>
+            <option>Otro</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label>Sugerencia o propuesta *</label>
+          <textarea placeholder="Escribe aquí tu idea, sugerencia o queja. Todas las voces importan..."></textarea>
+        </div>
+        <div class="habeas-notice">
+          🔒 <strong>Habeas Data — Ley 1581/2012:</strong> Los datos que proporciones se usarán únicamente para gestionar tu sugerencia internamente. No serán compartidos con terceros ni publicados sin tu autorización. Tienes derecho a conocer, actualizar y rectificar tu información.
+        </div>
+        <button class="btn-enviar" onclick="enviarSugerencia()">Enviar sugerencia 📨</button>
+      </div>
+    </div>
+
+    <div class="info-card" style="text-align:center;background:var(--azul2);color:#fff;">
+      <div style="font-size:2rem;margin-bottom:8px;">🏫</div>
+      <div style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:var(--amarillo);margin-bottom:4px;">Institución Educativa</div>
+      <div style="font-size:.8rem;color:#8aafd4;line-height:1.6;">Gobierno Escolar · Año 2025–2026<br>República de Colombia</div>
+    </div>
+  </div>
+  <div class="pie">
+    <strong>Desarrollada por Vibras Positivas HM</strong> — Derechos de Autor Reservados
+  </div>
+</div>
+
+<!-- BOTTOM NAV -->
+<nav class="bottom-nav">
+  <button class="bnav-item active" onclick="navTo('inicio')" id="bn-inicio">
+    <span class="bnav-icon">🏠</span>Inicio
+  </button>
+  <button class="bnav-item" onclick="navTo('candidatos')" id="bn-candidatos">
+    <span class="bnav-icon">👤</span>Candidatos
+  </button>
+  <button class="bnav-item" onclick="navTo('propuestas')" id="bn-propuestas">
+    <span class="bnav-icon">📋</span>Propuestas
+  </button>
+  <button class="bnav-item" onclick="navTo('votar')" id="bn-votar">
+    <span class="bnav-icon">🗳️</span>Votar
+  </button>
+  <button class="bnav-item" onclick="navTo('noticias')" id="bn-noticias">
+    <span class="bnav-icon">📰</span>Noticias
+  </button>
+  <button class="bnav-item" onclick="navTo('contacto')" id="bn-contacto">
+    <span class="bnav-icon">✉️</span>Contacto
+  </button>
+</nav>
+
+<!-- MODAL CANDIDATO -->
+<div class="modal-overlay" id="modal-candidato" onclick="cerrarModal(event)">
+  <div class="modal" style="position:relative;">
+    <div class="modal-handle"></div>
+    <button class="modal-close" onclick="document.getElementById('modal-candidato').classList.remove('open')">✕</button>
+    <div id="modal-body"></div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- INSTALL BANNER -->
+<div id="installBanner">
+  <p>📲 Instala esta app en tu dispositivo para acceder sin internet</p>
+  <button onclick="instalarApp()">Instalar</button>
+  <button class="close-btn" onclick="document.getElementById('installBanner').classList.remove('show')">✕</button>
+</div>
+
+<script>
+// ── NAVEGACIÓN ──
+let paginaActual = 'inicio';
+const candidatosData = {
+  'Laura': {
+    nombre:'Laura Sofía Martínez',
+    cargo:'Candidata a Presidenta del Gobierno Escolar',
+    grado:'Grado 11°-A',
+    avatar:'L',avClass:'av-azul',
+    lema:'"Una escuela donde cada estudiante tenga voz, participación y oportunidades reales de crecer."',
+    propuestas:[
+      '📚 Biblioteca digital gratuita para todos los grados',
+      '🌿 Proyecto de reciclaje y compostaje escolar',
+      '🤝 Comité de convivencia activo y accesible',
+      '🎭 Festival cultural semestral con todas las artes',
+      '💬 Buzón digital de sugerencias estudiantiles',
+    ],
+    video:false
+  },
+  'Carlos': {
+    nombre:'Carlos Andrés Peña',
+    cargo:'Candidato a Presidente del Gobierno Escolar',
+    grado:'Grado 10°-B',
+    avatar:'C',avClass:'av-rojo',
+    lema:'"Más deporte, más cultura y una cafetería digna para todos los estudiantes."',
+    propuestas:[
+      '⚽ Torneos deportivos interclases mensual',
+      '🍎 Mejora del menú de la cafetería escolar',
+      '🎵 Banda musical del colegio activa y apoyada',
+      '🏟️ Mantenimiento de zonas deportivas',
+      '📢 Canal de comunicación directa con rectoría',
+    ],
+    video:false
+  },
+  'Valeria': {
+    nombre:'Valeria Torres',
+    cargo:'Candidata a Presidenta del Gobierno Escolar',
+    grado:'Grado 11°-B',
+    avatar:'V',avClass:'av-verde',
+    lema:'"Tecnología, medio ambiente y bienestar estudiantil como ejes de un gobierno moderno."',
+    propuestas:[
+      '💻 Sala de tecnología con equipos actualizados',
+      '🌳 Jardín y huerta orgánica escolar',
+      '🧘 Espacio de bienestar emocional estudiantil',
+      '♻️ Campaña de cero residuos en el colegio',
+      '📱 App de comunicados escolares en tiempo real',
+    ],
+    video:false
+  },
+  'Sebastián': {
+    nombre:'Sebastián Gómez',
+    cargo:'Candidato a Presidente del Gobierno Escolar',
+    grado:'Grado 10°-A',
+    avatar:'S',avClass:'av-morado',
+    lema:'"Transparencia, honestidad y trabajo colectivo para transformar nuestra institución."',
+    propuestas:[
+      '📊 Rendición de cuentas mensual pública',
+      '🔍 Comité veeduría estudiantil independiente',
+      '🏫 Mejora de salones y mobiliario escolar',
+      '🎓 Programa de tutorías entre compañeros',
+      '🌐 Sitio web informativo del Gobierno Escolar',
+    ],
+    video:false
+  },
+};
+
+function navTo(page){
+  document.querySelector('.page.active')?.classList.remove('active');
+  document.getElementById('page-'+page)?.classList.add('active');
+  document.querySelector('.bnav-item.active')?.classList.remove('active');
+  document.getElementById('bn-'+page)?.classList.add('active');
+  paginaActual = page;
+  window.scrollTo(0,0);
+}
+
+// ── MODAL CANDIDATO ──
+function abrirCandidato(nombre){
+  const d = candidatosData[nombre];
+  if(!d) return;
+  const html = `
+    <div style="display:flex;align-items:center;gap:14px;margin-bottom:18px;">
+      <div class="candidato-avatar ${d.avClass}" style="width:60px;height:60px;font-size:1.5rem;">${d.avatar}</div>
+      <div>
+        <div style="font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:900;color:var(--azul2);">${d.nombre}</div>
+        <div style="font-size:.75rem;color:#888;margin-top:2px;">${d.cargo}</div>
+        <span class="candidato-grado">${d.grado}</span>
+      </div>
+    </div>
+    <div style="background:var(--humo);border-radius:10px;padding:14px;margin-bottom:16px;font-style:italic;font-size:.85rem;color:#555;line-height:1.6;border-left:3px solid var(--amarillo);">${d.lema}</div>
+    <div style="font-weight:700;font-size:.9rem;color:var(--azul2);margin-bottom:10px;">📌 Sus propuestas:</div>
+    <ul style="list-style:none;display:flex;flex-direction:column;gap:8px;">
+      ${d.propuestas.map(p=>`<li style="background:#f0f4ff;border-radius:8px;padding:10px 12px;font-size:.82rem;color:#333;">${p}</li>`).join('')}
+    </ul>
+  `;
+  document.getElementById('modal-body').innerHTML = html;
+  document.getElementById('modal-candidato').classList.add('open');
+}
+function cerrarModal(e){
+  if(e.target.id==='modal-candidato') document.getElementById('modal-candidato').classList.remove('open');
+}
+
+// ── VOTACIÓN ──
+let votoSel = null;
+function selVoto(el, nombre){
+  document.querySelectorAll('.voto-opcion').forEach(o=>o.classList.remove('sel'));
+  el.classList.add('sel');
+  votoSel = nombre;
+  document.getElementById('btn-votar').disabled = false;
+}
+function emitirVoto(){
+  const grado = document.getElementById('voto-grado').value;
+  if(!grado){mostrarToast('⚠️ Selecciona tu grado');return;}
+  if(!votoSel){mostrarToast('⚠️ Selecciona un candidato');return;}
+  document.getElementById('btn-votar').disabled = true;
+  document.getElementById('btn-votar').textContent = 'Procesando...';
+  setTimeout(()=>{
+    document.getElementById('voto-form-wrap').innerHTML = `
+      <div style="text-align:center;background:linear-gradient(135deg,var(--azul2),#27ae60);color:#fff;border-radius:var(--radio);padding:36px 20px;">
+        <div style="font-size:3rem;margin-bottom:12px;">✅</div>
+        <div style="font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:900;margin-bottom:8px;">¡Voto registrado!</div>
+        <div style="font-size:.85rem;color:#b8e8c4;line-height:1.6;">Gracias por participar en la democracia escolar.<br>Tu voz ha sido escuchada.</div>
+        <div style="margin-top:16px;background:rgba(255,255,255,.1);border-radius:10px;padding:12px;font-size:.82rem;">
+          Votaste por: <strong>${votoSel}</strong><br>Grado: <strong>${grado}</strong>
+        </div>
+      </div>`;
+    mostrarToast('🗳️ ¡Voto emitido con éxito!');
+  },1200);
+}
+
+// ── SUGERENCIA ──
+function enviarSugerencia(){
+  mostrarToast('📨 ¡Sugerencia enviada! Gracias');
+}
+
+// ── TOAST ──
+function mostrarToast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2800);
+}
+
+// ── PWA ──
+let deferredPrompt;
+window.addEventListener('beforeinstallprompt', e=>{
+  e.preventDefault();
+  deferredPrompt = e;
+  setTimeout(()=>document.getElementById('installBanner').classList.add('show'), 3000);
+});
+function instalarApp(){
+  document.getElementById('installBanner').classList.remove('show');
+  if(deferredPrompt){deferredPrompt.prompt();deferredPrompt=null;}
+}
+window.addEventListener('appinstalled',()=>mostrarToast('✅ App instalada exitosamente'));
+
+if('serviceWorker' in navigator){
+  window.addEventListener('load',()=>{
+    navigator.serviceWorker.register('./sw.js')
+      .catch(()=>{});
+  });
+}
+</script>
+</body>
+</html>
